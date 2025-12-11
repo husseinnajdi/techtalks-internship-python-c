@@ -45,7 +45,7 @@ Favorite_table = sqlalchemy.Table(
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("Activity_Id", sqlalchemy.ForeignKey("Activity.id"), nullable=False),
-    sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("users.id"), nullable=False)
+    sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("Users.id"), nullable=False)
 )
 
 
