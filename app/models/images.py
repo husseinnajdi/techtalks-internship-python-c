@@ -2,11 +2,16 @@ from pydantic import BaseModel
 
 
 class ImagesIn(BaseModel):
-    IsMaiImage:bool
+    IsMainImage:bool
+    id:str
+class AddImageIn(BaseModel):
+    Activity_Id: int
+    id: str
+    IsMainImage: bool
+    
 
 
 class Images(BaseModel):
-    imageId:int
-    activityId:int
+    Activity_Id:int
     class config:
         orm_mode= True

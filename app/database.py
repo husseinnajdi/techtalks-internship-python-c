@@ -37,7 +37,8 @@ Activity_table = sqlalchemy.Table(
     sqlalchemy.Column("Type", sqlalchemy.String),
     sqlalchemy.Column("Location", sqlalchemy.String),
     sqlalchemy.Column("AvgBudget", sqlalchemy.Integer),
-    sqlalchemy.Column("PhoneNumber", sqlalchemy.Integer)
+    sqlalchemy.Column("PhoneNumber", sqlalchemy.BigInteger),
+    sqlalchemy.Column("OwnerId",sqlalchemy.ForeignKey("Users.id"),nullable=False)
 )
 
 Favorite_table = sqlalchemy.Table(
@@ -52,7 +53,7 @@ Favorite_table = sqlalchemy.Table(
 Images_table = sqlalchemy.Table(
     "Images",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("id", sqlalchemy.String, primary_key=True),
     sqlalchemy.Column("Activity_Id", sqlalchemy.ForeignKey("Activity.id"), nullable=False),
     sqlalchemy.Column("IsMainImage", sqlalchemy.Boolean)
 )
