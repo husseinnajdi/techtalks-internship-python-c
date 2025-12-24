@@ -1,7 +1,0 @@
-Starting verification of signup flow...
-Testing signup for: test@example.com
-Signup function returned: {'uid': 'test_firebase_uid', 'message': 'User created successfully'}
-[PASS] Firebase create_user called correctly.
-DB Insert values: {'id': 'test_firebase_uid', 'Email': 'test@example.com', 'Name': 'Test User', 'role': 'user'}
-[PASS] Password is NOT stored in DB.
-Verification completed.

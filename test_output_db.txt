@@ -1,2 +1,0 @@
-Testing connection to: postgresql+asyncpg://postgres:0710@localhost:5432/pythonCproject
-Connection Failed: Multiple exceptions: [Errno 10061] Connect call failed ('::1', 5432, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 5432)

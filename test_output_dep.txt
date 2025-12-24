@@ -1,7 +1,0 @@
-Starting verification of auth dependency...
-Test 1: Valid Token
-[PASS] User returned correctly.
-Test 2: Invalid Token
-Auth error: Invalid token
-[PASS] Raised 401 as expected.
-Verification completed.
