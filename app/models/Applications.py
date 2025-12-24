@@ -13,4 +13,4 @@ class Application(ApplicationIn):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
