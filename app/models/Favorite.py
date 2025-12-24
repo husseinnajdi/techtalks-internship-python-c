@@ -2,11 +2,12 @@ from pydantic import BaseModel
 
 class FavoriteIn(BaseModel):
     Activity_Id:int
-    user_id:int
+    user_id:str
+
 class Favorite(BaseModel):
     id: int
-    user_id: int
+    user_id: str
     Activity_Id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

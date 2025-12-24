@@ -13,5 +13,5 @@ class AddImageIn(BaseModel):
 
 class Images(BaseModel):
     Activity_Id:int
-    class config:
-        orm_mode= True
+    class Config:
+        from_attributes = True

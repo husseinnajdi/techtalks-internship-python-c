@@ -6,7 +6,7 @@ class ActivityIn(BaseModel):
     AvgBudget: int
     Type: str
     Location: str
-    OwnerId: int
+    OwnerId: str
 
 class Image(BaseModel):
     id: str
@@ -16,7 +16,7 @@ class Activity(ActivityIn):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ActivityWithMainImage(Activity):
     main_image: Optional[Image]
