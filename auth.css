@@ -1,0 +1,67 @@
+/* --- Page Login / Signup Styles --- */
+body {
+    background: var(--light-cream);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.auth-card {
+    background: var(--cream);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    text-align: center;
+}
+
+.auth-card h2 {
+    color: var(--brown-dark);
+    margin-bottom: 20px;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    font-size: 14px;
+    outline: none;
+}
+
+.auth-card input:focus {
+    border-color: var(--brown);
+    box-shadow: 0 0 5px rgba(139, 111, 71, 0.3);
+}
+
+.auth-card button {
+    width: 100%;
+    padding: 12px;
+    background: var(--brown-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth-card button:hover {
+    background: var(--brown);
+}
+
+.auth-card a {
+    color: var(--brown-dark);
+    text-decoration: underline;
+}
