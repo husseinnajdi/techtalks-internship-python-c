@@ -16,7 +16,7 @@ const placesData = [
         id: 2,
         name: "Jeita Grotto",
         category: "nature",
-        location: "byblos",
+        location: "Jeita",
         price: "budget",
         priceDisplay: "$",
         image: "https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Jeita+Grotto",
@@ -350,3 +350,4 @@ window.addEventListener('click', (e) => {
         modal.style.display = 'none';
     }
 });
+
