@@ -7,7 +7,7 @@ const loadMoreBtn = document.getElementById('loadMoreBtn');
 
 let activities = [
     { id: 1, title: 'Visit Byblos Castle', category: 'culture', price: 50, time: 'today', location: 'Byblos', coordinates: { lat: 34.1208, lng: 35.6481 } },
-    { id: 2, title: 'Jeita Grotto Tour', category: 'outdoors', price: 30, time: 'weekend', location: 'Beirut', coordinates: { lat: 33.9478, lng: 35.6383 } },
+    { id: 2, title: 'Jeita Grotto Tour', category: 'outdoors', price: 30, time: 'weekend', location: 'Jeita', coordinates: { lat: 33.9478, lng: 35.6383 } },
     { id: 3, title: 'Zaitunay Bay Dinner', category: 'food', price: 80, time: 'today', location: 'Beirut', coordinates: { lat: 33.9021, lng: 35.5040 } },
     { id: 4, title: 'Cedars Hiking', category: 'outdoors', price: 20, time: 'weekend', location: 'Bsharri', coordinates: { lat: 34.2778, lng: 36.0111 } },
     { id: 5, title: 'Tyre Beach Day', category: 'outdoors', price: 40, time: 'today', location: 'Tyre', coordinates: { lat: 33.2704, lng: 35.2038 } },
@@ -44,12 +44,12 @@ const loadNextPage = () => {
         let priceOk = act.price >= priceMin && act.price <= priceMax;
         let catOk = !cat || cat === 'all' || act.category === cat;
         let timeOk = !time || act.time === time;
-        
+
         // NEW: Distance filter
         let distanceOk = true;
         const userLocation = JSON.parse(localStorage.getItem('userLocation') || 'null');
         const maxDistance = document.getElementById('distanceSlider')?.value;
-        
+
         if (userLocation && maxDistance && act.coordinates) {
             const distance = calculateDistance(
                 userLocation.latitude,
@@ -59,13 +59,13 @@ const loadNextPage = () => {
             );
             distanceOk = distance <= parseFloat(maxDistance);
         }
-        
+
         return priceOk && catOk && timeOk && distanceOk;
     });
 
     const start = currentPage * itemsPerPage;
     const nextItems = filteredActivities.slice(start, start + itemsPerPage);
-    
+
     setTimeout(() => {
         renderActivities(nextItems);
         currentPage++;
