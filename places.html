@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places - Kazdoura</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="places.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">Kazdoura</div>
+            <a href="login.html" class="btn login-btn">Login</a>
+        </div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="places.html" class="active-page">Places</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="places-top-section">
+        <div class="places-search-filter">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="search" id="searchPlaces" placeholder="Search places in Lebanon...">
+                </div>
+            </div>
+
+            <div class="places-filters">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="restaurant">Restaurants</option>
+                        <option value="cafe">Cafés</option>
+                        <option value="historical">Historical Sites</option>
+                        <option value="nature">Nature & Outdoors</option>
+                        <option value="entertainment">Entertainment</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Location:</label>
+                    <select id="locationFilter">
+                        <option value="all">All Locations</option>
+                        <option value="beirut">Beirut</option>
+                        <option value="tripoli">Tripoli</option>
+                        <option value="batroun">Batroun</option>
+                        <option value="byblos">Byblos</option>
+                        <option value="saida">Saida</option>
+                        <option value="tyre">Tyre</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Price Range:</label>
+                    <select id="priceFilter">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="budget">$ (Budget)</option>
+                        <option value="moderate">$$ (Moderate)</option>
+                        <option value="expensive">$$$ (Expensive)</option>
+                    </select>
+                </div>
+
+                <button id="resetFilters" class="reset-btn">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="places-grid" id="placesGrid">
+        <!-- Places will be dynamically inserted here -->
+    </section>
+
+    <!-- Place Detail Modal -->
+    <div id="placeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p class="modal-category" id="modalCategory"></p>
+                <p class="modal-location" id="modalLocation"></p>
+                <p class="modal-price" id="modalPrice"></p>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-details">
+                    <p id="modalHours"></p>
+                    <p id="modalContact"></p>
+                </div>
+
+                <div class="modal-comments">
+                    <h3>Comments & Reviews</h3>
+                    <div class="comment-form">
+                        <textarea id="commentText" placeholder="Share your experience about this place..."></textarea>
+                        <button id="submitComment">Submit Comment</button>
+                        <p style="font-size: 12px; color: #999; margin-top: 8px;">💡 Your comment will be reviewed by
+                            our admin before being published.</p>
+                    </div>
+                    <div class="comments-list" id="commentsList">
+                        <!-- Comments will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="places.js"></script>
+</body>
+
+</html>

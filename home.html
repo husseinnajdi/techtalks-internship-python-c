@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kazdoura</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="logo">Kazdoura</div>
+            <form id="filterForm" class="search-container">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="search" id="search" placeholder="Search places in Lebanon...">
+                    <button type="submit" class="hidden-submit-btn"></button>
+                </div>
+                <div id="suggestionsPanel" class="suggestions-panel">
+                    <ul>
+                        <li><a href="#">Hotels in Beirut</a></li>
+                        <li><a href="#">Cafes in Jounieh</a></li>
+                        <li><a href="#">Italian Food near Byblos</a></li>
+                    </ul>
+                </div>
+            </form>
+            <button class="btn filter-open-btn" id="filterBtn">Filters</button>
+            <a href="login.html" class="btn login-btn">Login</a>
+        </div>
+        <nav>
+            <a href="home.html" class="active-page">Home</a>
+            <a href="places.html">Places</a>
+            <a href="favorites.html">My Favorites</a
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Where To Go In Lebanon</h1>
+            <h2>Find the best restaurants, cafés, historical sites and activities</h2>
+        </div>
+    </section>
+
+    <section class="why">
+        <h2>Why Choose Our Website?</h2><br>
+        <p class="subtitle">
+            We help you decide where to go based on your budget, age, and preferences.
+        </p><br>
+        <div class="why-cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    alt="Personalized Suggestions">
+                <h3>Personalized Suggestions</h3><br>
+                <p>Get recommendations based on your budget & age.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    alt="Verified Places">
+                <h3>Verified Places</h3><br>
+                <p>All spots are reviewed and recommended by real people.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1624464891762-09d8f8b8b1b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    alt="All Across Lebanon">
+                <h3>All Across Lebanon</h3><br>
+                <p>From Beirut to Tripoli, Saida, Tyre, Batroun & more.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Explore Categories</h2><br>
+        <div class="category-grid">
+            <div class="category-item">
+                <h3>Food & Drink</h3>
+            </div>
+            <div class="category-item">
+                <h3>Outdoors & Nature</h3>
+            </div>
+            <div class="category-item">
+                <h3>Entertainment & Activities</h3>
+            </div>
+        </div>
+    </section>
+
+    <div id="filterPanel" class="filter-panel">
+        <div class="filter-header">
+            <h3>Search Filter</h3>
+            <button id="closeFilter">X</button>
+        </div>
+        <div class="filter-content">
+
+            <label>Category (Optional):</label>
+            <div class="filter-pills category-pills">
+                <button class="pill" data-category="food">Food & Drink</button>
+                <button class="pill" data-category="outdoors">Outdoors & Nature</button>
+                <button class="pill" data-category="activities">Activities</button>
+                <button class="pill" data-category="culture">Culture & History</button>
+                <button class="pill" data-category="shopping">Shopping</button>
+                <button class="pill" data-category="beaches">Beaches & Pools</button>
+                <button class="pill" data-category="hotels">Hotels & Stays</button>
+                <button class="pill" data-category="nightlife">Nightlife</button>
+            </div>
+            <label>Location:</label>
+            <select id="location">
+                <option value="" selected>All Locations</option>
+                <option>Beirut</option>
+                <>
+            </select>
+
+            <!-- NEW: Distance Filter -->
+            <div id="distanceFilterGroup" style="display: none;">
+                <label>Distance from you:</label>
+                <div class="distance-slider-container">
+                    <input type="range" id="distanceSlider" min="1" max="50" value="20" step="1">
+                    <div class="distance-value">
+                        <span id="distanceValue">20</span> km
+                    </div>
+                </div>
+            </div>
+            <div class="time-inputs">
+                <label>Preferred Time (Optional):</label>
+                <div class="time-selector">
+                    <div class="time-field">
+                        <label for="hour">Hour:</label>
+                        <select id="hour">
+                            <option value="">Any</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="time-field">
+                        <label for="minute">Minute:</label>
+                        <select id="minute">
+                            <option value="">Any</option>
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    <div class="time-field">
+                        <label for="ampm">AM/PM:</label>
+                        <select id="ampm">
+                            <option value="">Any</option>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <label>Price Range (per person):</label>
+            <div class="price-range-inputs">
+                <input type="number" id="priceMin" placeholder="From $" min="0">
+                <input type="number" id="priceMax" placeholder="To $" min="0">
+            </div>
+
+            <label>Location:</label>
+            <select id="location">
+                <option value="" selected>All Locations</option>
+                <option>Beirut</option>
+                <option>Tripoli</option>
+                <option>Batroun</option>
+                <option>Jounieh</option>
+                <option>Byblos</option>
+                <option>Saida</option>
+                <option>Tyre</option>
+                <option>Zahle</option>
+                <option>Baalbek</option>
+                <option>Jbeil</option>
+                <option>Bcharre</option>
+                <option>Aley</option>
+                <option>Hamra</option>
+                <option>Gemmayze</option>
+                <option>Mar Mikhael</option>
+                <option>Dbayeh</option>
+                <option>Jal el Dib</option>
+                <option>Broummana</option>
+                <option>Beiteddine</option>
+            </select>
+
+        </div>
+
+        <div class="filter-footer">
+            <button id="resetFilter">Reset</button>
+            <button id="applyFilter">Apply</button>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="home.js"></script>
+    <script src="home.js"></script>
+
+    <!-- Location Permission Modal -->
+   <div id="locationModal" class="location-modal" style="display: none;">
+        <div class="location-modal-content">
+            <h3>📍 Enable Location Services</h3>
+            <p>Allow Kazdoura to access your location to show nearby places and calculate distances.</p>
+            <div class="location-modal-buttons">
+                <button id="allowLocation" class="btn-allow">Allow</button>
+                <button id="denyLocation" class="btn-deny">Not Now</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
