@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map View - Kazdoura</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: calc(100vh - 200px);
+            min-height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-header h1 {
+            font-size: 38px;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+
+        .map-header p {
+            font-size: 16px;
+            color: var(--text-medium);
+        }
+
+        .map-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .map-filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--cream-dark);
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+
+        .map-filter-btn.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--text-dark);
+        }
+
+        .map-filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom Popup Styles */
+        .leaflet-popup-content-wrapper {
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content {
+            padding: 10px;
+            min-width: 200px;
+        }
+
+        .popup-content h3 {
+            font-size: 18px;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .popup-content p {
+            font-size: 14px;
+            color: var(--text-medium);
+            margin-bottom: 5px;
+        }
+
+        .popup-view-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-view-btn:hover {
+            background: var(--brown-light);
+        }
+
+        .loading-map {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: var(--text-medium);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">Kazdoura</div>
+            <a href="login.html" class="btn login-btn">Login</a>
+        </div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="places.html">Places</a>
+            <a href="favorites.html">My Favorites</a>
+            <a href="map.html" class="active-page">Map View</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="map-container">
+        <div class="map-header">
+            <h1>🗺️ Explore Lebanon on the Map</h1>
+            <p>Click on any pin to see place details</p>
+        </div>
+
+        <div class="map-controls">
+            <button class="map-filter-btn active" data-category="all">All Places</button>
+            <button class="map-filter-btn" data-category="restaurant">🍽️ Restaurants</button>
+            <button class="map-filter-btn" data-category="cafe">☕ Cafés</button>
+            <button class="map-filter-btn" data-category="historical">🏛️ Historical</button>
+            <button class="map-filter-btn" data-category="nature">🌲 Nature</button>
+            <button class="map-filter-btn" data-category="entertainment">🎉 Entertainment</button>
+        </div>
+
+        <div id="loadingMap" class="loading-map">Loading map...</div>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="map.js"></script>
+</body>
+
+</html>
