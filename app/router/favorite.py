@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from app.models.Favorite import Favorite, FavoriteIn
-from app.database import database, Favorite_table
+from models.Favorite import Favorite, FavoriteIn
+from database import database, Favorite_table
 
 router=APIRouter()
 

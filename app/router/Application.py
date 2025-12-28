@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from app.models.Applications import Application, ApplicationIn
-from app.database import database, Application_table
-from app.firebase_config import auth
+from models.Applications import Application, ApplicationIn
+from database import database, Application_table
+from firebase_config import auth
 
 router = APIRouter()
 

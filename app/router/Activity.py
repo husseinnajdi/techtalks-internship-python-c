@@ -1,9 +1,8 @@
-from fastapi import APIRouter, HTTPException, Depends
-from app.models.Activity import Activity, ActivityIn,ActivityWithMainImage
-from app.models.images import Images, ImagesIn, AddImageIn
-from app.database import database, Activity_table, Images_table, User_table
-from app.firebase_config import auth
-from app.router.auth import get_current_user
+from fastapi import APIRouter, HTTPException
+from models.Activity import Activity, ActivityIn,ActivityWithMainImage
+from models.images import Images, ImagesIn, AddImageIn
+from database import database, Activity_table, Images_table
+from firebase_config import auth
 
 router = APIRouter()
 
@@ -12,55 +11,38 @@ async def get_image_by_activityId(activity_id: int):
     return await database.fetch_all(query)
 
 @router.post("/activity",response_model=Activity)
-async def create_new_activity(activity: ActivityIn, img:ImagesIn, current_user: dict = Depends(get_current_user)):
-    # Override OwnerId with the authenticated user's UID
-    data={**activity.dict(), "OwnerId": current_user['uid']}
+async def create_new_activity(activity: ActivityIn, img:ImagesIn):
+    data={**activity.dict()}
     imagedata={**img.dict()}
-    
     query=Activity_table.insert().values(data)
     last_record_id=await database.execute(query)
-    
     imgquery=Images_table.insert().values({**imagedata,"Activity_Id":last_record_id})
     await database.execute(imgquery)
-    
     return {**data,"id": last_record_id}
 
 @router.post("/activity/image",response_model=Images)
-async def add_image_to_activity(img:AddImageIn, current_user: dict = Depends(get_current_user)):
-    # In a real app, verify that current_user owns the activity relevant to this image
+async def add_image_to_activity(img:AddImageIn):
     imagedata={**img.dict()}
     imgquery=Images_table.insert().values(imagedata)
     last_record_id=await database.execute(imgquery)
     return {**imagedata,"id": last_record_id}
 
 @router.put("/activity/{activity_id}",response_model=Activity)
-async def update_activity(activity_id: int, activity: ActivityIn, current_user: dict = Depends(get_current_user)):
-    # Verify ownership
-    query_check = Activity_table.select().where(Activity_table.c.id == activity_id)
-    existing_activity = await database.fetch_one(query_check)
-    
-    if not existing_activity:
-         raise HTTPException(status_code=404, detail="Activity not found")
-         
-    if existing_activity['OwnerId'] != current_user['uid']:
-        raise HTTPException(status_code=403, detail="Not authorized to update this activity")
-
-    data={**activity.dict(), "OwnerId": current_user['uid']}
+async def update_activity(activity_id: int, activity: ActivityIn):
+    data={**activity.dict()}
     query=Activity_table.update().where(Activity_table.c.id==activity_id).values(data)
     await database.execute(query)
     return {**data,"id": activity_id}
 
 @router.put("/activity/image/{img_id}",response_model=Images)
-async def update_main_image(img_id: str, img: ImagesIn, current_user: dict = Depends(get_current_user)):
-    # Should check ownership of the activity the image belongs to
+async def update_main_image(img_id: str, img: ImagesIn):
     imagedata={**img.dict()}
     query=Images_table.update().where(Images_table.c.id==img_id).values(imagedata)
     await database.execute(query)
     return {**imagedata,"id": img_id}
 
 @router.delete("/activity/{img_id}")
-async def delete_image_from_activity(img_id: str, current_user: dict = Depends(get_current_user)):
-    # Should check ownership
+async def delete_image_from_activity(img_id: str):
     query=Images_table.delete().where(Images_table.c.id==img_id)
     await database.execute(query)
     return {"message":"Image deleted successfully"}

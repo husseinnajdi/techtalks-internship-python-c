@@ -11,9 +11,10 @@ metadata = sqlalchemy.MetaData()
 User_table=sqlalchemy.Table(
     "Users",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.String, primary_key=True),
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("Email", sqlalchemy.String),
     sqlalchemy.Column("Name", sqlalchemy.String),
+    sqlalchemy.Column("Password", sqlalchemy.String),
     sqlalchemy.Column("role",sqlalchemy.String)
 )
 
