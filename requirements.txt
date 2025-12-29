@@ -5,3 +5,4 @@ databases
 asyncpg
 firebase-admin
 pydantic
+python-dotenv

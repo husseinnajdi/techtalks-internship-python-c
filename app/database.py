@@ -1,8 +1,14 @@
 import sqlalchemy
 from sqlalchemy.ext.asyncio import create_async_engine
 from databases import Database
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DATABASE_URL = "postgresql+asyncpg://postgres:0710@localhost:5432/pythonCproject"
+
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 database = Database(DATABASE_URL)
 
@@ -14,6 +20,7 @@ User_table=sqlalchemy.Table(
     sqlalchemy.Column("id", sqlalchemy.String, primary_key=True),
     sqlalchemy.Column("Email", sqlalchemy.String),
     sqlalchemy.Column("Name", sqlalchemy.String),
+    sqlalchemy.Column("Password", sqlalchemy.String),
     sqlalchemy.Column("role",sqlalchemy.String)
 )
 
@@ -35,10 +42,15 @@ Activity_table = sqlalchemy.Table(
     sqlalchemy.Column("Description", sqlalchemy.String),
     sqlalchemy.Column("Type", sqlalchemy.String),
     sqlalchemy.Column("Location", sqlalchemy.String),
+    # Geo coordinates (WGS84). Keeping Location as a human-readable string,
+    # and storing the actual point separately for proper distance queries.
+    sqlalchemy.Column("Latitude", sqlalchemy.Float, nullable=True),
+    sqlalchemy.Column("Longitude", sqlalchemy.Float, nullable=True),
     sqlalchemy.Column("AvgBudget", sqlalchemy.Integer),
     sqlalchemy.Column("PhoneNumber", sqlalchemy.BigInteger),
     sqlalchemy.Column("OwnerId",sqlalchemy.ForeignKey("Users.id"),nullable=False)
 )
+sqlalchemy.Index("ix_activity_latitude_longitude", Activity_table.c.Latitude, Activity_table.c.Longitude)
 
 Favorite_table = sqlalchemy.Table(
     "Favorite",
