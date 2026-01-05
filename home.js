@@ -512,3 +512,34 @@ function showNotification(message) {
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
+// --- AUTHENTICATION UI LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    const currentUserJSON = localStorage.getItem('currentUser');
+    if (currentUserJSON) {
+        try {
+            const user = JSON.parse(currentUserJSON);
+            const loginBtn = document.querySelector('.login-btn');
+            
+            if (loginBtn) {
+                // Display the user's name
+                const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
+                
+                // Update button style and text
+                loginBtn.innerHTML = '<span> ' + displayName + '</span>';
+                loginBtn.href = '#';
+                loginBtn.title = 'Click to Logout';
+                
+                // Add logout handler
+                loginBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to log out?')) {
+                        localStorage.removeItem('currentUser');
+                        window.location.reload();
+                    }
+                });
+            }
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+        }
+    }
+});

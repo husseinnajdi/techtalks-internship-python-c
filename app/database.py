@@ -1,14 +1,9 @@
 import sqlalchemy
 from sqlalchemy.ext.asyncio import create_async_engine
 from databases import Database
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+DATABASE_URL = "postgresql+asyncpg://postgres:Charbel@localhost:5432/postgres"
 
-DATABASE_URL = "postgresql+asyncpg://postgres:0710@localhost:5432/pythonCproject"
-
-GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 database = Database(DATABASE_URL)
 

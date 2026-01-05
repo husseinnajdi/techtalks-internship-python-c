@@ -1,6 +1,20 @@
 // auth.js
+// Initialize Firebase
+let auth = null;
+let googleProvider = null;
+
+if (typeof firebase !== 'undefined' && typeof firebaseConfig !== 'undefined') {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    auth = firebase.auth();
+    googleProvider = new firebase.auth.GoogleAuthProvider();
+} else {
+    console.warn("Firebase SDK or Config not loaded. Auth will not work.");
+}
 
 const authOverlay = document.getElementById('authOverlay');
+// ... rest of the file ...
 const authModal = document.getElementById('authModal');
 const authClose = document.getElementById('authClose');
 const authForm = document.getElementById('authForm');

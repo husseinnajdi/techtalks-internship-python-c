@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 class ActivityIn(BaseModel):
     PhoneNumber: int
@@ -6,6 +6,8 @@ class ActivityIn(BaseModel):
     AvgBudget: int
     Type: str
     Location: str
+    Latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    Longitude: Optional[float] = Field(default=None, ge=-180, le=180)
     OwnerId: str
 
 class Image(BaseModel):
@@ -20,3 +22,6 @@ class Activity(ActivityIn):
 
 class ActivityWithMainImage(Activity):
     main_image: Optional[Image]
+
+class ActivityWithMainImageDistance(ActivityWithMainImage):
+    distance_km: float

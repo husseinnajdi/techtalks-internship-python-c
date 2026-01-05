@@ -1,150 +1,69 @@
 // Places data
-const placesData = [
-    {
-        id: 1,
-        name: "Tawlet Beirut",
-        category: "restaurant",
-        location: "beirut",
-        price: "moderate",
-        priceDisplay: "$$",
-        image: "https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Tawlet+Beirut",
-        description: "A unique farm-to-table restaurant showcasing authentic Lebanese cuisine from different regions. Each day features a different village's traditional recipes.",
-        hours: "12:00 PM - 11:00 PM",
-        contact: "+961 1 448 129"
-    },
-    {
-        id: 2,
-        name: "Jeita Grotto",
-        category: "nature",
-        location: "Jeita",
-        price: "budget",
-        priceDisplay: "$",
-        image: "https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Jeita+Grotto",
-        description: "A stunning natural wonder featuring spectacular limestone caves with underground rivers and breathtaking stalactite formations.",
-        hours: "9:00 AM - 5:00 PM",
-        contact: "+961 9 220 841"
-    },
-    {
-        id: 3,
-        name: "Café Younes",
-        category: "cafe",
-        location: "beirut",
-        price: "budget",
-        priceDisplay: "$",
-        image: "https://via.placeholder.com/400x300/95E1D3/333333?text=Cafe+Younes",
-        description: "Historic coffee roastery and café serving the finest Lebanese coffee since 1935. A must-visit for coffee enthusiasts.",
-        hours: "7:00 AM - 8:00 PM",
-        contact: "+961 1 340 871"
-    },
-    {
-        id: 4,
-        name: "Baalbek Ruins",
-        category: "historical",
-        location: "baalbek",
-        price: "free",
-        priceDisplay: "Free",
-        image: "https://via.placeholder.com/400x300/F38181/FFFFFF?text=Baalbek+Ruins",
-        description: "Ancient Roman temple complex and UNESCO World Heritage site, featuring some of the best-preserved Roman ruins in the world.",
-        hours: "8:00 AM - 6:00 PM",
-        contact: "+961 8 370 750"
-    },
-    {
-        id: 5,
-        name: "Skybar Beirut",
-        category: "entertainment",
-        location: "beirut",
-        price: "expensive",
-        priceDisplay: "$$$",
-        image: "https://via.placeholder.com/400x300/AA96DA/FFFFFF?text=Skybar+Beirut",
-        description: "Rooftop lounge and nightclub with stunning views of Beirut's coastline. Features international DJs and a vibrant atmosphere.",
-        hours: "9:00 PM - 4:00 AM",
-        contact: "+961 3 748 444"
-    },
-    {
-        id: 6,
-        name: "Byblos Old Souk",
-        category: "historical",
-        location: "byblos",
-        price: "free",
-        priceDisplay: "Free",
-        image: "https://via.placeholder.com/400x300/FCBAD3/333333?text=Byblos+Souk",
-        description: "Ancient marketplace in one of the oldest continuously inhabited cities in the world. Perfect for shopping traditional crafts.",
-        hours: "10:00 AM - 10:00 PM",
-        contact: "+961 9 540 325"
-    },
-    {
-        id: 7,
-        name: "Eddé Sands",
-        category: "nature",
-        location: "byblos",
-        price: "moderate",
-        priceDisplay: "$$",
-        image: "https://via.placeholder.com/400x300/A8E6CF/333333?text=Edde+Sands",
-        description: "Beautiful beach resort with crystal clear waters, water sports, and beachside dining. Perfect for a relaxing day by the sea.",
-        hours: "8:00 AM - 8:00 PM",
-        contact: "+961 9 540 666"
-    },
-    {
-        id: 8,
-        name: "Em Nazih",
-        category: "restaurant",
-        location: "tripoli",
-        price: "budget",
-        priceDisplay: "$",
-        image: "https://via.placeholder.com/400x300/FFD93D/333333?text=Em+Nazih",
-        description: "Authentic Tripoli cuisine in a traditional setting. Famous for their kibbeh and traditional sweets.",
-        hours: "11:00 AM - 10:00 PM",
-        contact: "+961 6 432 887"
-    },
-    {
-        id: 9,
-        name: "Tyre Hippodrome",
-        category: "historical",
-        location: "tyre",
-        price: "free",
-        priceDisplay: "Free",
-        image: "https://via.placeholder.com/400x300/6BCB77/FFFFFF?text=Tyre+Hippodrome",
-        description: "Ancient Roman hippodrome and archaeological site, part of the UNESCO World Heritage site of Tyre.",
-        hours: "8:00 AM - 6:00 PM",
-        contact: "+961 7 740 821"
-    },
-    {
-        id: 10,
-        name: "Pierre & Friends",
-        category: "cafe",
-        location: "batroun",
-        price: "moderate",
-        priceDisplay: "$$",
-        image: "https://via.placeholder.com/400x300/4D96FF/FFFFFF?text=Pierre+Friends",
-        description: "Charming seaside café with stunning Mediterranean views. Known for their fresh seafood and relaxed atmosphere.",
-        hours: "10:00 AM - 11:00 PM",
-        contact: "+961 3 870 445"
-    },
-    {
-        id: 11,
-        name: "Sidon Sea Castle",
-        category: "historical",
-        location: "saida",
-        price: "free",
-        priceDisplay: "Free",
-        image: "https://via.placeholder.com/400x300/FF6B9D/FFFFFF?text=Sidon+Castle",
-        description: "Crusader sea castle built in the 13th century on a small island connected to the mainland by a stone bridge.",
-        hours: "8:00 AM - 6:00 PM",
-        contact: "+961 7 720 549"
-    },
-    {
-        id: 12,
-        name: "The Backyard Hazmieh",
-        category: "entertainment",
-        location: "beirut",
-        price: "moderate",
-        priceDisplay: "$$",
-        image: "https://via.placeholder.com/400x300/C3ACD0/333333?text=The+Backyard",
-        description: "Outdoor entertainment venue with live music, food trucks, and a vibrant atmosphere. Great for families and groups.",
-        hours: "5:00 PM - 1:00 AM",
-        contact: "+961 5 956 777"
+// Places data
+let placesData = [];
+
+// Fetch places from Backend
+async function fetchPlaces() {
+    try {
+        const response = await fetch(`${API_URL}/activitys`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const backendPlaces = await response.json();
+
+        // Map backend data to frontend structure
+        placesData = backendPlaces.map(place => {
+            // Determine price category based on AvgBudget
+            let priceCode = "budget";
+            let priceDisplay = "$";
+            if (place.AvgBudget === 0) {
+                priceCode = "free";
+                priceDisplay = "Free";
+            } else if (place.AvgBudget > 50) {
+                priceCode = "expensive";
+                priceDisplay = "$$$";
+            } else if (place.AvgBudget > 20) {
+                priceCode = "moderate";
+                priceDisplay = "$$";
+            }
+
+            // Image URL logic (placeholder if missing, or construct if ID exists)
+            // Note: Currently backend provides {id: "string", IsMainImage: bool} but no direct URL endpoint confirmed.
+            // Using placeholder for now unless ID looks like a URL.
+            let imageUrl = "https://via.placeholder.com/400x300/CCCCCC/666666?text=No+Image";
+            if (place.main_image && place.main_image.id) {
+                // Assuming ID might be a URL in some cases, or we'd need an endpoint like /images/{id}
+                // For now, if it starts with http, use it, else placeholder.
+                if (place.main_image.id.startsWith("http")) {
+                    imageUrl = place.main_image.id;
+                }
+            }
+
+            return {
+                id: place.id,
+                name: place.name || place.Description.substring(0, 20) || `Activity #${place.id}`, // Fallback since Name is missing in backend model
+                category: place.Type,
+                location: place.Location,
+                price: priceCode,
+                priceDisplay: priceDisplay,
+                image: imageUrl,
+                description: place.Description,
+                hours: "9:00 AM - 6:00 PM", // Default/Missing
+                contact: place.PhoneNumber
+            };
+        });
+
+        // Update display
+        displayPlaces(placesData);
+
+    } catch (error) {
+        console.error("Failed to fetch places:", error);
+        placesGrid.innerHTML = '<p style="text-align: center; color: red;">Failed to load places. Please try again later.</p>';
     }
-];
+}
+
+// Initial fetch
+document.addEventListener('DOMContentLoaded', fetchPlaces);
 
 // Get DOM elements
 const placesGrid = document.getElementById('placesGrid');
@@ -164,8 +83,8 @@ let commentsData = {
 
 let currentPlaceId = null;
 
-// Display all places initially
-displayPlaces(placesData);
+// Display all places initially - MOVED to fetchPlaces()
+// displayPlaces(placesData);
 
 // Search functionality
 searchInput.addEventListener('input', (e) => {

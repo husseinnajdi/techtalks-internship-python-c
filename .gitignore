@@ -1,1 +1,11 @@
 serviceAccountKey.json
+.env
+__pycache__/
+*.pyc
+temp_firebase.json
+verify_*.py
+debug_*.py
+*_output*.txt
+startup_error.txt
+launch.json
+.vscode/
