@@ -7,6 +7,14 @@ from app.router.auth import get_current_user
 
 router = APIRouter()
 
+def _validate_coords(latitude, longitude):
+    # Allow activities without coordinates, but require both when provided.
+    if (latitude is None) ^ (longitude is None):
+        raise HTTPException(
+            status_code=400,
+            detail="Latitude and Longitude must be provided together (or both omitted).",
+        )
+        
 async def get_image_by_activityId(activity_id: int):
     query = Images_table.select().where(Images_table.c.Activity_Id == activity_id)
     return await database.fetch_all(query)

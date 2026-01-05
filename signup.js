@@ -1,27 +1,35 @@
 // signup.js
+document.getElementById('signupForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-const gmailBtn = document.getElementById('gmailSignUpBtn');
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-gmailBtn.addEventListener('click', () => {
-    // simulate Gmail sign-up
-    const email = prompt('Enter your Gmail address');
-    if (!email || !email.includes('@gmail.com')) {
-        alert('Please enter a valid Gmail address');
-        return;
+    try {
+        const response = await fetch(`${API_URL}/auth/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                name: username
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Account created successfully!');
+            window.location.href = 'login.html';
+        } else {
+            alert(`Signup failed: ${data.detail || 'Unknown error'}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error for signup. Please make sure the backend is running.');
     }
-
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.find(u => u.email === email)) {
-        alert('User already exists. Please login.');
-        window.location.href = 'login.html';
-        return;
-    }
-
-    const username = email.split('@')[0];
-    const password = Math.random().toString(36).slice(-8); // generate random password
-
-    users.push({ username, email, password });
-    localStorage.setItem('users', JSON.stringify(users));
-    alert(`Account created! Your temporary password is: ${password}`);
-    window.location.href = 'login.html';
 });
+
